@@ -48,7 +48,6 @@ namespace Opibus
                 Resources[resource.Type] -= resource.Amount;
                 if (Resources[resource.Type] < 0)
                     Resources[resource.Type] = 0;
-
             }
         }
 
