@@ -162,3 +162,5 @@ MonoBehaviour:
   requirements: []
   produceType: 0
   storage: {fileID: 0}
+  notificationPool: {fileID: 0}
+  ui: {fileID: 0}

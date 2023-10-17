@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Opibus.Controllers;
 using UnityEngine;
 
 namespace Opibus.Resource
@@ -14,12 +15,15 @@ namespace Opibus.Resource
         [SerializeField] private List<ResourceAmountPair> requirements;
         [SerializeField] private ResourceType produceType;
         [SerializeField] private StorageManager storage;
+        [SerializeField] private NotificationPool notificationPool;
+        [SerializeField] private UiController ui;
 
         public ResourceType ResourceType { get => produceType; }
         public int ProducedResources { get; private set; }
 
         private const string resourcesWarn = "Not enough resources on storage";
         private const string storageWarn = "Storage is full";
+        private const string producingText = "Is Producing";
         private bool isProducing;
 
 
@@ -37,14 +41,17 @@ namespace Opibus.Resource
             {
                 if (!storage.CanUseResources(requirements))
                 {
-                    Debug.Log(GetWarnMessage(resourcesWarn));
+                    ui.ChangeBuildingDescription(this,
+                        GetWarnMessage(resourcesWarn));
                     return;
                 }
                 if (IsLocalStorageFull())
                 {
-                    Debug.Log(GetWarnMessage(storageWarn));
+                    ui.ChangeBuildingDescription(this,
+                        GetWarnMessage(storageWarn));
                     return;
                 }
+                ui.ChangeBuildingDescription(this, producingText);
                 StartCoroutine(Produce());
             }
         }
@@ -53,6 +60,7 @@ namespace Opibus.Resource
         {
             isProducing = true;
             storage.UseResources(requirements);
+            notificationPool.NewNotification(transform.position, produceAmount, produceTime);
             yield return new WaitForSeconds(produceTime);
             ProducedResources += produceAmount;
             if (IsLocalStorageFull())
@@ -61,7 +69,7 @@ namespace Opibus.Resource
         }
 
         private string GetWarnMessage(string reason) =>
-            $"{gameObject.name} stopped due to [{reason}]";
+            $"Stopped due to [{reason}]";
 
         private bool IsLocalStorageFull() => ProducedResources >= produceLimit;
 

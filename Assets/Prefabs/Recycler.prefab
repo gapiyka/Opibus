@@ -121,6 +121,8 @@ MonoBehaviour:
     <Amount>k__BackingField: 6
   produceType: 2
   storage: {fileID: 0}
+  notificationPool: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!1 &7001218339957604541
 GameObject:
   m_ObjectHideFlags: 0
