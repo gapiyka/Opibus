@@ -6,9 +6,13 @@ Test task for **saint.wtf** company.
 
 [Tech task](https://docs.google.com/document/d/1lYAqTC_itDfjB3ahedPrJLXCTkSM6haxG1Wqc4ovZAM/edit?usp=sharing)
 
+Opibus from latin: 1. Resources; 2. Power (plural); 3. Aid
+
+![image](https://github.com/gapiyka/Opibus/assets/50524296/3d0e7cf0-4e94-4bd1-991f-6a61d037f40a)
+
 ## Demo of gameplay
 
-https://github.com/gapiyka/Opibus/assets/50524296/5211ba87-5dad-4097-beb3-7c51ce254464
+https://github.com/gapiyka/Opibus/assets/50524296/c463c962-a16c-4c30-bf50-89331b16f552
 
  
 ## Q&A
