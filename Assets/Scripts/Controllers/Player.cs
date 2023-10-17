@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Opibus.Audio;
 using Opibus.Input;
 using Opibus.Resource;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Opibus.Controllers
     public class Player : MonoBehaviour
     {
         [SerializeField] private UIInput uiInput;
+        [SerializeField] private SoundManager soundManager;
         [SerializeField] private float speed;
         [SerializeField] private float resourcesTransferTime;
         [SerializeField] private int resourcesPerTransfer;
@@ -70,6 +72,7 @@ namespace Opibus.Controllers
                 if (!building.TryToCollect(resourcesPerTransfer))
                     continue;
                 inventory.ReceiveResources(building.ResourceType, resourcesPerTransfer);
+                soundManager.PlaySound(SoundType.Process);
                 AddToBackpack();
             }
             isTransferring = false;
@@ -93,6 +96,7 @@ namespace Opibus.Controllers
                     continue;
                 inventory.UseResources(resourcePair);
                 storage.ReceiveResources(resource.Type, resourcesPerTransfer);
+                soundManager.PlaySound(SoundType.Process);
                 RemoveFromBackpack();
                 list[0].Amount -= resourcesPerTransfer;
                 if (list[0].Amount <= 0) list.RemoveAt(0);
